@@ -13,6 +13,6 @@ spec:
             port:
               number: 80
       retries:
-        attempts: 2 # Máximo 2 intentos de retry
-        perTryTimeout: 2s # Timeout de 2 segundos por intento
+        attempts: 2
+        perTryTimeout: 2s
         retryOn: gateway-error,connect-failure,refused-stream

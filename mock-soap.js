@@ -6,8 +6,14 @@ const service = {
     CertificacionPort: {
       RegistrarCertificacion(args) {
         console.log("SOAP recibido:", args);
-        // Simula error lanzando excepción para que Istio vea fallo
-        throw new Error("Simulated SOAP failure");
+
+        const estados = ["procesado", "en revisión", "rechazado"];
+        const estadoRandom =
+          estados[Math.floor(Math.random() * estados.length)];
+
+        return {
+          estado: estadoRandom,
+        };
       },
     },
   },
