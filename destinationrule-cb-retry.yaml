@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: soap-service-destination
+  namespace: default
+spec:
+  host: soap-service
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 100
+      http:
+        http1MaxPendingRequests: 100
+        maxRequestsPerConnection: 100
+    outlierDetection:
+      consecutive5xxErrors: 3 # Circuit Breaker: 3 errores HTTP 5xx consecutivos
+      interval: 60s # Ventana de 60 segundos
+      baseEjectionTime: 30s # Tiempo que el host queda excluido del pool
+      maxEjectionPercent: 100 # Puede excluir hasta el 100% de hosts
